@@ -9,14 +9,14 @@ if __name__ == '__main__':
     # Criar uma instancia do Google Chrome pelo Selenium
     driver = webdriver.Chrome()
     driver.implicitly_wait(10)
-    
+
     # Acessar URL do Linkedin
     driver.get(URL_LINKEDIN_DS)
 
     # Pegar lista de resultado de vagas de DS
-    resultados = driver.find_elements_by_class_name('result-card')    
+    resultados = driver.find_elements_by_class_name('result-card')
     lista_descricao = []
-    
+
     # Iniar While loop em cima de todos os resultados
     while True:
         # For loop para coletar descrições de dados
@@ -30,14 +30,12 @@ if __name__ == '__main__':
                 lista_descricao.append(descricao.text)
             except:
                 print('Erro')
-                pass
-            
         resultados = driver.find_elements_by_class_name('result-card')
 
         # Critério de saída do While
         if len(lista_descricao) == len(resultados):
             break
-    
+
     # Salvar descricões de vagas
     descricao_salvar = '\n'.join(lista_descricao)
     with open('descricoes_vagas.txt', 'w') as f:
